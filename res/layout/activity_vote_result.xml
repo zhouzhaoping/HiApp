@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"     
+    android:background="@drawable/background_login" >
+    
+	<RelativeLayout
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:paddingLeft="4dp"
+    	android:paddingRight="12dp"
+    	android:paddingTop="4dp"
+    	android:paddingBottom="4dp"
+    	android:background="@drawable/menu_bg"
+    	android:orientation="horizontal">
+	   
+	    <ImageView
+	        android:id = "@+id/go_back_button"
+	        android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="6dp"
+            android:clickable="true"
+            android:src="@drawable/button_back_background"      
+	    />
+	    	    
+	    <ImageView
+	        android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/go_back_button"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/title_image"      
+	    />
+	    
+  
+	</RelativeLayout>	
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/background_login_div_bg"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        android:padding="10dip"
+        android:rowCount="3" >
+
+        <ImageView
+            android:id="@+id/voting_image"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_column="0"
+            android:layout_gravity="start"
+            android:layout_margin="5dp"
+            android:layout_rowSpan="3"
+            android:contentDescription="@string/app_name" />
+
+        <TextView
+            android:id="@+id/voting_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:layout_column="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="69dp"
+            android:textColor="#427d6e"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/voting_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            android:layout_column="1"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="69dp"
+            android:textColor="#666666"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/voting_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_column="1"
+            android:layout_gravity="left|top"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="69dp"
+            android:textColor="#2bae93"
+            android:textSize="13sp" />
+    </GridLayout>
+    	
+	<ListView   
+     android:id="@id/android:list"
+     android:layout_width="fill_parent"  
+     android:layout_height="wrap_content" 
+     android:background="@drawable/background_login_div_bg"
+     android:layout_marginLeft="8dp"
+     android:layout_marginRight="8dp"
+     android:layout_marginTop="4dp"
+     android:layout_marginBottom="4dp"  
+     android:paddingLeft="4dp"
+     android:paddingRight="4dp" 
+     > 	</ListView>   
+	    
+
+</LinearLayout>

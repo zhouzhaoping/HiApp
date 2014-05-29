@@ -1,0 +1,85 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_login" 
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity$DummySectionFragment" >
+
+<ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+<LinearLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+    
+   <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dip" >
+
+        <ImageView
+            android:id="@+id/button_main_1"
+            style="@style/main_button_style"
+            />
+
+        <ImageView
+            android:id="@+id/button_main_2"
+            style="@style/main_button_style"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        
+        <ImageView
+            android:id="@+id/button_main_3"
+            style="@style/main_button_style"
+            />
+        
+        <ImageView
+            android:id="@+id/button_main_4"
+            style="@style/main_button_style"
+            />
+    </LinearLayout>
+    
+    <LinearLayout
+        	android:id="@+id/linearLayout1"
+        	android:layout_width="wrap_content"
+        	android:layout_height="wrap_content" 
+        	android:layout_marginTop="8dp">
+        
+        <TextView
+            android:id="@+id/jisuanji_hint_main"         
+            android:layout_width="128dp"
+        	android:layout_height="100dp"
+        	android:layout_marginTop="64dp"
+        	android:layout_marginLeft = "8dp"
+        	android:layout_marginRight = "8dp"
+        	android:padding="8dp"
+         	android:textColor="#427d6e"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+        
+        <ImageView
+            android:id="@+id/jisuanji_main"
+            android:layout_width="128dp"
+        	android:layout_height="159dp"
+        	android:layout_margin = "8dp"
+            android:src="@drawable/jisuanji" />        
+    </LinearLayout>
+    
+    
+   </LinearLayout>
+   </ScrollView>
+</RelativeLayout>

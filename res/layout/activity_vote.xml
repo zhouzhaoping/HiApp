@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/background_login">
+    
+	<RelativeLayout
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:paddingLeft="4dp"
+    	android:paddingRight="12dp"
+    	android:paddingTop="4dp"
+    	android:paddingBottom="4dp"
+    	android:background="@drawable/menu_bg"
+    	android:orientation="horizontal">
+	   
+	    <ImageView
+	        android:id = "@+id/go_back_button"
+	        android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="6dp"
+            android:clickable="true"
+            android:src="@drawable/button_back_background"      
+	    />
+	    	    
+	    <ImageView
+	        android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/go_back_button"
+            android:layout_marginLeft="4dp"
+            android:src="@drawable/title_image"      
+	    />
+	        
+	    <ImageView 
+	        android:id = "@+id/go_add_button"
+	        android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+    		android:clickable="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/button_add_background"   
+	    />
+	    
+	</RelativeLayout>
+   
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center">
+	<TextView
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_margin="4dp"
+	    android:text="@string/voting_hint"
+	    android:textColor="#427d6e"
+	    android:textSize="30sp"
+	    android:textStyle="bold" >    
+	</TextView>
+	</LinearLayout>
+	
+    <ListView
+     	android:id="@id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="4dp">
+    </ListView>	
+</LinearLayout>

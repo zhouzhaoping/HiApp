@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">HiApp</string>
+    <string name="action_settings">设置</string>
+    <string name="title_section1">新鲜事</string>
+    <string name="title_section2">新消息</string>
+    <string name="title_section3">通讯录</string>
+    <string name="login_label_username">帐号</string>
+    <string name="login_label_password">密码</string>
+    <string name="login_label_signin">登 录</string>
+    <string name="login_username_hint">请输入学号</string>
+    <string name="infor_user_base_infor">基本信息</string>   
+    <string name="infor_user_school_infor">学校信息</string>   
+    <string name="infor_user_contact_infor">联系方式</string>  
+    <string name="infor_user_say_infor">个性签名</string> 
+    <string name="infor_user_sex_infor">性别:\t</string>   
+    <string name="infor_user_birth_infor">生日:\t</string>   
+    <string name="infor_user_university_infor">学校:\t</string>  
+    <string name="infor_user_class_infor">班级:\t</string> 
+    <string name="infor_user_QQ_infor">扣扣:\t</string>   
+    <string name="infor_user_tel_infor">电话:\t</string>   
+    <string name="voting_hint">欢迎参加投票</string>   
+</resources>

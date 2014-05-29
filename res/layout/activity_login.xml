@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/GridLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"   
+    android:background="@drawable/background_login">
+	
+     <RelativeLayout 
+  	android:id="@+id/login_div"
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:padding="15dip"        
+  	android:layout_margin="15dip" 
+  	android:background="@drawable/background_login_div_bg"
+  	>
+  	<!-- 账号 -->
+  	<TextView 
+  		android:id="@+id/login_user_input"
+  		android:layout_width="wrap_content"
+  		android:layout_height="wrap_content"
+  		android:layout_alignParentTop="true"
+  		android:layout_marginTop="5dp"
+  		android:text="@string/login_label_username"
+  		/>
+  	<EditText 
+  		android:id="@+id/username_edit"
+  		android:layout_width="fill_parent"
+  		android:layout_height="wrap_content"
+  		android:hint="@string/login_username_hint"
+  		android:layout_below="@id/login_user_input"
+  		android:singleLine="true"
+  		android:inputType="text"/>
+    <!-- 密码 text -->
+    <TextView 
+    	android:id="@+id/login_password_input"
+    	android:layout_width="wrap_content"
+    	android:layout_height="wrap_content"
+    	android:layout_below="@id/username_edit"
+    	android:layout_marginTop="10dp"
+    	android:text="@string/login_label_password"
+    	/>
+    <EditText 
+    	android:id="@+id/password_edit"
+    	android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:layout_below="@id/login_password_input"
+    	android:singleLine="true"
+    	android:inputType="textPassword"
+    />
+    <!-- 登录button -->
+
+    <Button
+        android:id="@+id/signin_button"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignRight="@id/password_edit"
+        android:layout_below="@id/password_edit"
+        android:text="@string/login_label_signin"  
+        android:textColor="#FFFFFF" 
+        android:layout_marginTop="10dp" 
+        android:background="@drawable/button_bg_background" /> 	
+  	</RelativeLayout>
+</GridLayout>
