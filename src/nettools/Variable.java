@@ -3,6 +3,9 @@ package nettools;
 //Êý¾Ý¿â×Ö¶Î
 public final class Variable
 {
+	static String contact[] = {"person_name", "person_telephone", "person_introduction", "person_profile"};
+	static String getMessage[] = {"msg_from", "msg_time", "msg_content"};
+	static String info[] = {"username", "usersex", "userbirth", "useruniver", "userclass", "userQQ", "usertel", "usersay"};
 	
 	static String activity[] = {"title", "publish_time", "content", "picture_address1", "picture_address2", "picture_address3"};
 	static String talk[] = {"act_name", "act_intro", "act_time", ""};

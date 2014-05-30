@@ -52,9 +52,6 @@ public class NetThread{
 	public Bitmap mBitmap2;
 	public Bitmap mBitmap3;
 	
-	public List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-	public Map<String, Object> map1 = new HashMap<String, Object>();
-	
 	JSONObject param = new JSONObject();
 	
 	public NetThread(){}
@@ -94,12 +91,13 @@ public class NetThread{
         }
 	}
 
-	public List<Map<String, Object>> getData(String[] str){
+	public List<Map<String, Object>> getDataList(String[] str){
 		try {			
 			int  i;
 			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 			//JSONArray jsonarr = new JSONArray(result);
 			for (i = 0; i < result.length(); i++)	{
+				// 尽管像info那样的只有单个信息，也需要放在list里，为了统一的设计
 				JSONObject object = result.getJSONObject(i);
 				Map<String, Object> map = new HashMap<String, Object>();
 				for (int j = 0; j < str.length; j++)
