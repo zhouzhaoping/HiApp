@@ -94,6 +94,27 @@ public class NetThread{
         }
 	}
 
+	public List<Map<String, Object>> getData(String[] str){
+		try {			
+			int  i;
+			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+			//JSONArray jsonarr = new JSONArray(result);
+			for (i = 0; i < result.length(); i++)	{
+				JSONObject object = result.getJSONObject(i);
+				Map<String, Object> map = new HashMap<String, Object>();
+				for (int j = 0; j < str.length; j++)
+					map.put(str[j], object.getString(str[j]));
+					//TODO:如果不是String需要用switch语句来进行分类处理		
+				list.add(map);
+			}
+
+			return list;
+		} catch (Exception e) {
+            e.printStackTrace();
+        }
+		return null;
+	}
+	
 	public String convert(String time) {
 		int  i;
 		String res;

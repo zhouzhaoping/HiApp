@@ -8,5 +8,4 @@ public final class Variable
 	static String talk[] = {"act_name", "act_intro", "act_time", ""};
 	static String return_code[] = {"return_code"};
 	static String comment[] = {"activity_id", "publisher_id", "publish_time", "content"};
-	
 }

@@ -48,5 +48,9 @@
 
 ##5.总TODO
 1. 到Q群上下载git快速入门，学习并使用
+2. 在上面的联系方式中添加你的信息，证明你已经掌握了git
+
+##6.需要解决的问题
+1. JSONArray 的使用需要 API level 19 (current min is 14)
 
 
