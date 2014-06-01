@@ -86,6 +86,8 @@ public class MainFragment extends Fragment {
 			 break;
 		 case 1:
 			 button0.setOnClickListener(goGetMsg);
+			 button1.setOnClickListener(goSendMsg);
+			 button2.setOnClickListener(goSendAct);
 			 break;
 		 case 2:
 			 button0.setOnClickListener(goContact);
@@ -156,5 +158,29 @@ public class MainFragment extends Fragment {
 			  intent.putExtras(bundle);
 			  startActivity(intent);
 		 }
-	 }; 	 
+	 }; 	
+	 private Button.OnClickListener goSendAct = new Button.OnClickListener()
+	 {
+		  public void onClick(View v)
+		 {
+			  // Close this Activity
+			  Intent intent = new Intent();
+			  intent.setClass(getActivity(), SendMessageActivity.class);
+			  Bundle bundle = new Bundle();
+			  intent.putExtras(bundle);
+			  startActivity(intent);
+		 }
+	 };
+	 private Button.OnClickListener goSendMsg = new Button.OnClickListener()
+	 {
+		  public void onClick(View v)
+		 {
+			  // Close this Activity
+			  Intent intent = new Intent();
+			  intent.setClass(getActivity(), SendMessage.class);
+			  Bundle bundle = new Bundle();
+			  intent.putExtras(bundle);
+			  startActivity(intent);
+		 }
+	 };
 }

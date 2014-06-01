@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical" > 
+  
+<TextView
+android:id="@+id/intext"
+android:layout_width="fill_parent"
+android:layout_height="50dip"
+android:textColor="#000F00"
+android:textSize="11pt"
+android:gravity="center_vertical"
+android:layout_marginLeft="10dip"
+android:text="Input the theme"
+/>
+<EditText
+android:id="@+id/inedit"
+android:layout_width="fill_parent"
+   android:layout_height="wrap_content"
+   android:hint="input here"
+   android:inputType="textMultiLine"
+   android:gravity="left|top"
+   android:minLines="1"
+/>
+<TextView
+android:id="@+id/intext2"
+android:layout_width="fill_parent"
+android:layout_height="50dip"
+android:textColor="#000F00"
+android:textSize="11pt"
+android:gravity="center_vertical"
+android:layout_marginLeft="10dip"
+android:text="Input the content"
+/>
+
+<EditText
+android:id="@+id/theme"
+android:layout_width="fill_parent"
+   android:layout_height="wrap_content"
+   android:hint="input here"
+   android:inputType="textMultiLine"
+   android:gravity="left|top"
+   android:minLines="3"
+/>
+<RelativeLayout
+android:layout_width="fill_parent"
+android:layout_height="53dip"
+android:orientation="horizontal"
+>
+
+<Button 
+android:id="@+id/confirm"
+android:layout_width="80dip"
+android:layout_height="50dip"
+android:layout_marginLeft="20dip"
+android:text="確定"
+android:gravity="center"
+/>
+  </RelativeLayout>
+</LinearLayout>

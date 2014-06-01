@@ -45,6 +45,9 @@
         <activity android:name="VotingActivity"></activity>
         <activity android:name="OneVoteActivity"></activity>
         <activity android:name="ShowVoteActivity"></activity>
+        <activity android:name="SendMessage"></activity>
+        <activity android:name="SendMessageActivity"></activity>
+        <activity android:name="SendMsgFragment"></activity>
 
     </application>
     
