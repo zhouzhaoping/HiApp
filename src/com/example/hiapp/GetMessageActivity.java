@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import nettools.NetThread;
+
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,7 +28,11 @@ public class GetMessageActivity extends ListActivity {
 	 findViews();
 	 showResults();
 	 setListensers(); 
-	 adapter = new SimpleAdapter(this, getData(), R.layout.list_row_message, 
+	 
+	 NetThread t = new NetThread("getMessages", 2, 1100012865, null, null, -1, null, null);
+	 t.BeginDeal();
+		
+	 adapter = new SimpleAdapter(this, t.getDataList(), R.layout.list_row_message, 
         		new String[]{"mse_from","msg_time","msg_content"},
         		new int[]{R.id.msg_from,R.id.msg_time,R.id.msg_content});  
 	 setListAdapter(adapter);   	 

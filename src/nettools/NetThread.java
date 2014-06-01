@@ -98,6 +98,28 @@ public class NetThread{
 			str1 = Variable.server_activity;
 			str2 = Variable.client_activity;
 		}
+		else if (method.equals("sendActivity"))
+		{
+			
+		}
+		else if (method.equals("getCmtList"))
+		{
+			
+		}
+		else if (method.equals("sendCmt"))
+		{
+			
+		}
+		else if (method.equals("getMessages"))
+		{
+			str1 = Variable.getMessage;
+			str2 = Variable.getMessage;
+		}
+		else if (method.equals("getuserinfo"))
+		{
+			str1 = Variable.info;
+			str2 = Variable.info;
+		}
 		
 		try {			
 			int  i;

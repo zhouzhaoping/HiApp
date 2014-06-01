@@ -27,6 +27,7 @@ public class ActivityActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contact_activity);
+		
 		NetThread t = new NetThread("getActivityList", 2, 1100012847, null, null, -1, null, null);
 		t.BeginDeal();
 		
