@@ -6,13 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import nettools.NetThread;
+
 
 import android.app.ListActivity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
+import android.widget.SimpleAdapter.ViewBinder;
 
 public class ActivityActivity extends ListActivity {
 	
@@ -23,11 +27,26 @@ public class ActivityActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contact_activity);
-		adapter = new SimpleAdapter(this, getData(), R.layout.list_row_activity, 
+		NetThread t = new NetThread("getActivityList", 2, 1100012847, null, null, -1, null, null);
+		t.BeginDeal();
+		
+		adapter = new SimpleAdapter(this, t.talk(), R.layout.list_row_activity, 
 	        		new String[]{"act_name","act_time","act_intro","act_main_pic"
 	        	,"act_content1","act_small_pic1", "act_small_pic2","act_go"},
 	        		new int[]{R.id.act_name,R.id.act_time,R.id.act_intro,R.id.act_main_pic
-	        	, R.id.act_content1,R.id.act_small_pic1, R.id.act_small_pic2, R.id.act_go});  
+	        	, R.id.act_content1,R.id.act_small_pic1, R.id.act_small_pic2, R.id.act_go});
+		
+	   adapter.setViewBinder(new ViewBinder(){
+			@Override
+			public boolean setViewValue(View view, Object data,	String textRepresentation) {
+				if (view instanceof ImageView && data instanceof Bitmap) {
+					ImageView iv = (ImageView)view;
+					iv.setImageBitmap((Bitmap) data);
+					return true;
+				}
+				return false;
+			}
+	   });
 	   setListAdapter(adapter);   
 	   findViews();
 	   setListensers();
