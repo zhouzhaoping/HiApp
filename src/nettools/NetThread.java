@@ -91,7 +91,14 @@ public class NetThread{
         }
 	}
 
-	public List<Map<String, Object>> getDataList(String[] str){
+	public List<Map<String, Object>> getDataList(){
+		String[] str1 = null, str2 = null;
+		if (method.equals("getActivityList"))
+		{
+			str1 = Variable.server_activity;
+			str2 = Variable.client_activity;
+		}
+		
 		try {			
 			int  i;
 			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
@@ -100,9 +107,15 @@ public class NetThread{
 				// 尽管像info那样的只有单个信息，也需要放在list里，为了统一的设计
 				JSONObject object = result.getJSONObject(i);
 				Map<String, Object> map = new HashMap<String, Object>();
-				for (int j = 0; j < str.length; j++)
-					map.put(str[j], object.getString(str[j]));
+				for (int j = 0; j < str2.length; j++)
+				{
+					String strget = object.getString(str1[j]);
+					if (str1[j].equals("publish_time"))
+						map.put(str2[j], convert(strget));
+					else
+						map.put(str2[j], strget);
 					//TODO:如果不是String需要用switch语句来进行分类处理		
+				}
 				list.add(map);
 			}
 

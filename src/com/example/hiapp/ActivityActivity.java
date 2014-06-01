@@ -30,7 +30,7 @@ public class ActivityActivity extends ListActivity {
 		NetThread t = new NetThread("getActivityList", 2, 1100012847, null, null, -1, null, null);
 		t.BeginDeal();
 		
-		adapter = new SimpleAdapter(this, t.talk(), R.layout.list_row_activity, 
+		adapter = new SimpleAdapter(this, t.getDataList(), R.layout.list_row_activity, 
 	        		new String[]{"act_name","act_time","act_intro","act_main_pic"
 	        	,"act_content1","act_small_pic1", "act_small_pic2","act_go"},
 	        		new int[]{R.id.act_name,R.id.act_time,R.id.act_intro,R.id.act_main_pic
