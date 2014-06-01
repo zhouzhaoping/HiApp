@@ -25,11 +25,9 @@ public class ActivityActivity extends ListActivity {
 		setContentView(R.layout.contact_activity);
 		adapter = new SimpleAdapter(this, getData(), R.layout.list_row_activity, 
 	        		new String[]{"act_name","act_time","act_intro","act_main_pic"
-	        	,"act_content1","act_content2","act_content3","act_content4", 
-	        	"act_small_pic1", "act_small_pic2","act_go"},
+	        	,"act_content1","act_small_pic1", "act_small_pic2","act_go"},
 	        		new int[]{R.id.act_name,R.id.act_time,R.id.act_intro,R.id.act_main_pic
-	        	, R.id.act_content1, R.id.act_content2, R.id.act_content3, R.id.act_content4,
-	        	R.id.act_small_pic1, R.id.act_small_pic2, R.id.act_go});  
+	        	, R.id.act_content1,R.id.act_small_pic1, R.id.act_small_pic2, R.id.act_go});  
 	   setListAdapter(adapter);   
 	   findViews();
 	   setListensers();
@@ -58,10 +56,7 @@ public class ActivityActivity extends ListActivity {
 		map.put("act_name", "上庄水库");
 		map.put("act_time", "2013.3.24");
 		map.put("act_intro", "春和景明，踏青吃烧烤");
-		map.put("act_content1", "从3班请来了翔叔，烤的烧烤引发了哄抢");
-		map.put("act_content2", "刚是不是有人把椅子都到湖里了");
-		map.put("act_content3", "下午的杀人好给力");
-		map.put("act_content4", "过去的路上找不到班长太不给力了");
+		map.put("act_content1", Util.ToDBC("从3班请来了翔叔，烤的烧烤引发了哄抢,刚是不是有人把椅子都到湖里了,下午的杀人好给力,过去的路上找不到班长太不给力了"));
 		map.put("act_main_pic", R.drawable.act_mian_pic_bg);
 		map.put("act_small_pic1", R.drawable.act_small_pic_bg);
 		map.put("act_small_pic2", R.drawable.act_small_pic_bg);		
@@ -73,9 +68,6 @@ public class ActivityActivity extends ListActivity {
 		map.put("act_time", "2013.5.20");
 		map.put("act_intro", "长河落日骑马观景");
 		map.put("act_content1", "计算机系男女比例首超二比一");
-		map.put("act_content2", "信科少年迷失草原将何去何从");
-		map.put("act_content3", "北大学子竟然毕业河北卖烤串");
-		map.put("act_content4", "马儿马儿，你为何跑得这么快");
 		map.put("act_main_pic", R.drawable.act_mian_pic_bg);
 		map.put("act_small_pic1", R.drawable.act_small_pic_bg);
 		map.put("act_small_pic2", R.drawable.act_small_pic_bg);		
@@ -87,9 +79,7 @@ public class ActivityActivity extends ListActivity {
 		map.put("act_time", "2012.11.5");
 		map.put("act_intro", "一起制作自己的寿司");
 		map.put("act_content1", "居然把整个学五二层都包下来了，太阔绰了");
-		map.put("act_content2", "原来做寿司不是用生米的，我真是太拿衣服了");
-		map.put("act_content3", "试试把寿司做成米老师状 ：-P");
-		map.put("act_content4", "剩下好多材料，下次再宿舍自己做");
+
 		map.put("act_main_pic", R.drawable.act_mian_pic_bg);
 		map.put("act_small_pic1", R.drawable.act_small_pic_bg);
 		map.put("act_small_pic2", R.drawable.act_small_pic_bg);	
@@ -101,9 +91,7 @@ public class ActivityActivity extends ListActivity {
 		map.put("act_time", "2012.12.21");
 		map.put("act_intro", "银装素裹，滑雪素拓");
 		map.put("act_content1", "有个帅哥划得好快啊啊啊啊啊！！");
-		map.put("act_content2", "每次排队上坡时间太长了！");
-		map.put("act_content3", "第一次滑雪，~上图为证！！！");
-		map.put("act_content4", "震神摔倒的姿势好文艺~");
+
 		map.put("act_main_pic", R.drawable.act_mian_pic_bg);
 		map.put("act_small_pic1", R.drawable.act_small_pic_bg);
 		map.put("act_small_pic2", R.drawable.act_small_pic_bg);
