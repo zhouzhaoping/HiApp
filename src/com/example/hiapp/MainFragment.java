@@ -164,11 +164,11 @@ public class MainFragment extends Fragment {
 		  public void onClick(View v)
 		 {
 			  // Close this Activity
-			  Intent intent = new Intent();
+			/*  Intent intent = new Intent();
 			  intent.setClass(getActivity(), SendMessageActivity.class);
 			  Bundle bundle = new Bundle();
 			  intent.putExtras(bundle);
-			  startActivity(intent);
+			  startActivity(intent);*/
 		 }
 	 };
 	 private Button.OnClickListener goSendMsg = new Button.OnClickListener()

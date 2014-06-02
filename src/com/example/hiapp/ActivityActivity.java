@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 import android.widget.SimpleAdapter.ViewBinder;
 
 public class ActivityActivity extends ListActivity {
@@ -81,6 +82,7 @@ public class ActivityActivity extends ListActivity {
 			  Bundle bundle = new Bundle();
 			  intent.putExtras(bundle);
 			  startActivity(intent);
+
 			  
 		 }
 	 };	
