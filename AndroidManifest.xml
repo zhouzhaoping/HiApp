@@ -48,6 +48,8 @@
         <activity android:name="SendMessage"></activity>
         <activity android:name="SendMessageActivity"></activity>
         <activity android:name="SendMsgFragment"></activity>
+		<activity android:name="StartVotingActivity"></activity>
+		<activity android:name="StartVotingChoiceActivity"></activity>
 
     </application>
     

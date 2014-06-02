@@ -22,6 +22,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 public class VotingActivity extends ListActivity {
 	private SimpleAdapter adapter; 
 	private ImageView button_back;
+	private ImageView button_new;
 	private ListView listview;
 	private List<Integer> idList;
 	@Override
@@ -39,11 +40,13 @@ public class VotingActivity extends ListActivity {
 	private void findViews()
 	{		
 		button_back = (ImageView) findViewById(R.id.go_back_button);
+		button_new = (ImageView) findViewById(R.id.go_add_button);
 		listview = getListView(); 
 	}
 	private void setListensers() 
 	{
 		button_back.setOnClickListener(goBack);
+		button_new.setOnClickListener(Newvote);
 	 }
 	
 	private Button.OnClickListener goBack = new Button.OnClickListener()
@@ -53,7 +56,18 @@ public class VotingActivity extends ListActivity {
 			 VotingActivity.this.finish();
 		}
 	}; 	
-	   
+	private Button.OnClickListener Newvote = new Button.OnClickListener()
+	{
+		public void onClick(View v)
+		{
+			Intent intent = new Intent();
+	        intent.setClass(VotingActivity.this, StartVotingActivity.class);
+	        Bundle bundle = new Bundle();      
+		  	intent.putExtras(bundle);
+		  	startActivity(intent);     
+			//VotingActivity.this.finish();
+		}
+	};
 	
 	private List<Map<String, Object>> getData() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
