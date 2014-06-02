@@ -45,12 +45,13 @@
 2. 大小写问题：Variable.java里的属性一定要使用小写
 3. 错误处理：通信过程可能出现多种错误，建议去掉"success":true这样的域，使用"return_code"，然后商量一份一致的错误列表
 4. 日期/时间以ISO格式传输，预先转换为utc+8，收到的时间字符串是“2014-05-23T13:33:18+08:00”这样的格式。
+5. sendActivity没办法传中文
+6. sendActivity正确发送之后会返回到Activity里，但是没有刷新出最新的内容
 
 ##5.总TODO
 1. 到Q群上下载git快速入门，学习并使用
 2. 在上面的联系方式中添加你的信息，证明你已经掌握了git
 
 ##6.需要解决的问题
-1. JSONArray 的使用需要 API level 19 (current min is 14)
-
+1. [貌似没有问题]JSONArray 的使用需要 API level 19 (current min is 14)
 

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,8 @@ public class SendMessageActivity extends Activity {
 	
 	public SendMessageActivity() {
 	}
+	
+	private ImageView button_back;
 	private TextView intext1;
 	private TextView intext2;
 	 private Button confirm;
@@ -35,6 +38,8 @@ public class SendMessageActivity extends Activity {
 			super.onCreate(savedInstanceState); 
 			setContentView(R.layout.activity_send); 
 
+			button_back = (ImageView) findViewById(R.id.go_back_button);
+			button_back.setOnClickListener(goBack);
 			intext1 = (TextView) this.findViewById(R.id.intext); 
 			inedit2=(EditText) this.findViewById(R.id.inedit2);
 			intext2 = (TextView) this.findViewById(R.id.intext2); 
@@ -48,8 +53,9 @@ public class SendMessageActivity extends Activity {
 				
 				NetThread t = new NetThread("sendActivity", -1, -1, "1100012847", inedit1.getText().toString(), inedit2.getText().toString(), -1, null, null);
 				t.BeginDeal();
+				int retCode = t.getReturnCode();
 				
-				if (t.retCode == 0)
+				if (retCode == 0)
 				{
 					new AlertDialog.Builder(SendMessageActivity.this)
 			         .setMessage("发布成功！")
@@ -66,9 +72,23 @@ public class SendMessageActivity extends Activity {
 				}
 				else 
 				{
-					Toast.makeText(SendMessageActivity.this, "发布失败，再试试吧亲！", Toast.LENGTH_SHORT).show();
+					new AlertDialog.Builder(SendMessageActivity.this)
+			         .setMessage("发布失败，再试试吧亲！")
+			         .setPositiveButton("确定",
+			          new DialogInterface.OnClickListener(){
+			              public void onClick(DialogInterface dialoginterface, int i){
+					} }).show();
+					//Toast.makeText(SendMessageActivity.this, "发布失败，！", Toast.LENGTH_SHORT).show();
 				}
 			}
 			}); 
 	 }
+	 
+	 private Button.OnClickListener goBack = new Button.OnClickListener()
+	 {
+		  public void onClick(View v)
+		 {
+			  SendMessageActivity.this.finish();
+		 }
+	 };	
 }

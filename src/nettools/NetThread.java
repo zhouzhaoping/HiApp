@@ -13,6 +13,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -49,7 +50,6 @@ public class NetThread{
 
 	public String retSrc;
 	public JSONArray result;
-	public int retCode;
 	
 	public Bitmap mBitmap1;
 	public Bitmap mBitmap2;
@@ -70,7 +70,6 @@ public class NetThread{
 		msg_id = mid;
 		username = u;
 		password = p;
-		retCode = -1;
 		try{
 			if (method != null) param.put("method", method);
 			if (count >= 0) param.put("count", count);
@@ -97,22 +96,24 @@ public class NetThread{
         }
 	}
 
+	public int getReturnCode()
+	{
+		
+		try {
+			JSONObject object = new JSONObject(retSrc);
+			return object.getInt("return_code");
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
+	
 	public List<Map<String, Object>> getDataList(){
 		String[] str1 = null, str2 = null;
 		if (method.equals("getActivityList"))
 		{
 			str1 = Variable.server_activity;
 			str2 = Variable.client_activity;
-		}
-		else if (method.equals("sendActivity"))
-		{
-			try{
-			JSONObject object = new JSONObject(retSrc);
-			retCode = object.getInt("return_code");
-			} catch (Exception e) {
-	            e.printStackTrace();
-	        }
-			return null;
 		}
 		else if (method.equals("getCmtList"))
 		{
