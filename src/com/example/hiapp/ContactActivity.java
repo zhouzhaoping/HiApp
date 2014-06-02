@@ -7,6 +7,7 @@ import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -19,12 +20,15 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ContactActivity extends ListActivity {
 
 	private SimpleAdapter adapter; 
 	private ImageView button_back;
 	private ListView listview;
+	private List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -75,10 +79,15 @@ public class ContactActivity extends ListActivity {
     public boolean onContextItemSelected(MenuItem item) {
 
             AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-
+            
             int id = (int) info.id;// 这里的info.id对应的就是数据库中_id的值
+            
             switch (item.getItemId()) {
             case 0:
+            	Toast toast=Toast.makeText(getApplicationContext(), "正在呼叫"+ list.get(id).get("person_name"), Toast.LENGTH_SHORT); 
+            	toast.show();
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + list.get(id).get("person_telephone")));
+                ContactActivity.this.startActivity(intent); 
                 break;
             case 1:
                 break;
@@ -92,11 +101,47 @@ public class ContactActivity extends ListActivity {
     
 	
 	private List<Map<String, Object>> getData() {
-		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-
+		
 		Map<String, Object> map = new HashMap<String, Object>();
+
+		map = new HashMap<String, Object>();
+		map.put("person_name", "文吉");
+		map.put("person_telephone", "18810335257");
+		map.put("person_introduction", "我从来都不搞基。");
+		map.put("person_profile", R.drawable.person_profile_image);
+		list.add(map);
+		
+		map = new HashMap<String, Object>();
+		map.put("person_name", "张舒汇");
+		map.put("person_telephone", "18810370548");
+		map.put("person_introduction", "啦啦啦啦啦我是最靠谱的团支书");
+		map.put("person_profile", R.drawable.person_profile_image);
+		list.add(map);
+		
+		map = new HashMap<String, Object>();
+		map.put("person_name", "周晓慧");
+		map.put("person_telephone", "18810521634");
+		map.put("person_introduction", "招募ACM志愿者！有必胜客吃哦！！~~~");
+		map.put("person_profile", R.drawable.person_profile_image);
+		list.add(map);
+		
+		map = new HashMap<String, Object>();
+		map.put("person_name", "张爽");
+		map.put("person_telephone", "15010589133");
+		map.put("person_introduction", "我是女生，可爱的女生");
+		map.put("person_profile", R.drawable.person_profile_image);
+		list.add(map);
+		
+		map = new HashMap<String, Object>();
+		map.put("person_name", "王世衡");
+		map.put("person_telephone", "18810335653");
+		map.put("person_introduction", "我要发矫情的状态！~~");
+		map.put("person_profile", R.drawable.person_profile_image);
+		list.add(map);
+
+		map = new HashMap<String, Object>();
 		map.put("person_name", "杨帅");
-		map.put("person_telephone", "1520*****68");
+		map.put("person_telephone", "15201512368");
 		map.put("person_introduction", "啊啊啊啊啊啊，我讨厌当美工！烦死啦啦啦啦啦啦！啊啊啊啊啊啊，我讨厌当美工！烦死啦啦啦啦啦啦！");
 		map.put("person_profile", R.drawable.person_profile_image);
 		list.add(map);
