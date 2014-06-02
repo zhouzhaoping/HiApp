@@ -1,4 +1,11 @@
 package com.example.hiapp;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import nettools.NetThread;
+import nettools.Variable;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,6 +50,28 @@ public class InforActivity extends Activity {
 	 }
 	 private void showResults() 
 	 {
+		 NetThread t = new NetThread("getUserInfor", 1, 1100012865, null, null, null, -1, null, null);
+		 t.BeginDeal();
+		 List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		 list = t.getDataList();
+		 Map<String, Object> map = new HashMap<String, Object>();
+		 map = list.get(0);
+		 int i;
+		 String temp = null;
+		 String[] str = Variable.info;
+		 String[] str2 = new String[10];
+		 for (i = 0; i < str.length; i++){
+			 str2[i] = map.get(str[i]).toString();
+		 }
+		 view_username.setText(str2[0]);
+		 view_usersex.setText(str2[1]);
+		 view_userbirth.setText(str2[2]);
+		 view_useruniver.setText(str2[3]);
+		 //view_userclass.setText(str2[4]);
+		 view_userQQ.setText(str2[4]);
+		 view_usertel.setText(str2[5]);
+		 view_usersay.setText(str2[6]);
+		 /*
 		 view_username.setText("williamyang");
 		 view_usersex.setText("男");
 		 view_userbirth.setText("1991.10.22");
@@ -51,6 +80,7 @@ public class InforActivity extends Activity {
 		 view_userQQ.setText("123456789");
 		 view_usertel.setText("1520*****68");
 		 view_usersay.setText("要死要死要死，大作业多得没人性T_T");
+		 */
 	 }
 	 
 	 private void setListensers() 
