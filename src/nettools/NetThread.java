@@ -329,11 +329,12 @@ public class NetThread{
 			try{
 				HttpClient client = new DefaultHttpClient();
 				HttpPost request = new HttpPost(url);
+				//request.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
 				
 				Log.d("request json", param.toString());
 				 
 				// 绑定到请求 Entry
-				StringEntity se = new StringEntity(param.toString()); 
+				StringEntity se = new StringEntity(param.toString(), "utf-8"); 
 				request.setEntity(se);
 				
 				// 发送请求

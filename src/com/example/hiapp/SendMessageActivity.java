@@ -1,5 +1,6 @@
 package com.example.hiapp;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import nettools.NetThread;
@@ -49,9 +50,11 @@ public class SendMessageActivity extends Activity {
 			confirm.setOnClickListener(new Button.OnClickListener(){ 
 			
 			public void onClick(View arg0) { 
-					//record the context!!!!
-				
-				NetThread t = new NetThread("sendActivity", -1, -1, "1100012847", inedit1.getText().toString(), inedit2.getText().toString(), -1, null, null);
+					
+				NetThread t = new NetThread("sendActivity", -1, -1, "1100012847", 
+						inedit1.getText().toString(), 
+						inedit2.getText().toString(), 
+						-1, null, null);
 				t.BeginDeal();
 				int retCode = t.getReturnCode();
 				
