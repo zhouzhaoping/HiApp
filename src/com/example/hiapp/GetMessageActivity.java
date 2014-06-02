@@ -29,7 +29,7 @@ public class GetMessageActivity extends ListActivity {
 	 showResults();
 	 setListensers(); 
 	 
-	 NetThread t = new NetThread("getMessages", 2, 1100012865, null, null, -1, null, null);
+	 NetThread t = new NetThread("getMessages", 2, 1100012865, null, null, null, -1, null, null);
 	 t.BeginDeal();
 		
 	 adapter = new SimpleAdapter(this, t.getDataList(), R.layout.list_row_message, 

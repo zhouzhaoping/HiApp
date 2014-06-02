@@ -21,4 +21,6 @@
     <string name="infor_user_QQ_infor">扣扣:\t</string>   
     <string name="infor_user_tel_infor">电话:\t</string>   
     <string name="voting_hint">欢迎参加投票</string>   
+    <string name="activity_send_hint1">输入活动名称</string>   
+    <string name="activity_send_hint2">输入活动内容</string>   
 </resources>

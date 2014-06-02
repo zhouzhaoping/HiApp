@@ -39,6 +39,7 @@ public class NetThread{
 	public int user_id;
 	
 	public String publisher_id;
+	public String title;
 	public String content;
 	
 	public int msg_id;
@@ -46,7 +47,9 @@ public class NetThread{
 	public String username;
 	public String password;
 
+	public String retSrc;
 	public JSONArray result;
+	public int retCode;
 	
 	public Bitmap mBitmap1;
 	public Bitmap mBitmap2;
@@ -56,21 +59,24 @@ public class NetThread{
 	
 	public NetThread(){}
 	
-	public NetThread(String m, int ct, int uid, String pid, String ctt,
+	public NetThread(String m, int ct, int uid, String pid, String _title, String ctt,
 			  		 int mid, String u, String p){
 		method = m;
 		count = ct;
 		user_id = uid;
 		publisher_id = pid;
+		title = _title;
 		content = ctt;
 		msg_id = mid;
 		username = u;
 		password = p;
+		retCode = -1;
 		try{
 			if (method != null) param.put("method", method);
 			if (count >= 0) param.put("count", count);
 			if (user_id >= 0) param.put("user_id", user_id);
 			if (publisher_id != null) param.put("publisher_id", publisher_id);
+			if (title != null) param.put("title", title);
 			if (content != null) param.put("content", content);
 			if (msg_id >= 0) param.put("msg_id", msg_id);
 			if (username != null) param.put("username", username);
@@ -100,7 +106,13 @@ public class NetThread{
 		}
 		else if (method.equals("sendActivity"))
 		{
-			
+			try{
+			JSONObject object = new JSONObject(retSrc);
+			retCode = object.getInt("return_code");
+			} catch (Exception e) {
+	            e.printStackTrace();
+	        }
+			return null;
 		}
 		else if (method.equals("getCmtList"))
 		{
@@ -124,7 +136,12 @@ public class NetThread{
 		try {			
 			int  i;
 			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
-			//JSONArray jsonarr = new JSONArray(result);
+			// 生成 JSON 对象
+			result = new JSONArray(retSrc);
+			if (result != null)
+				Log.d("result", "yes");
+			else 
+				Log.d("result", "oh, no!");
 			for (i = 0; i < result.length(); i++)	{
 				// 尽管像info那样的只有单个信息，也需要放在list里，为了统一的设计
 				JSONObject object = result.getJSONObject(i);
@@ -322,15 +339,9 @@ public class NetThread{
 				HttpResponse httpResponse = client.execute(request);
 				
 				// 得到应答的字符串，这也是一个 JSON 格式保存的数据
-				String retSrc = EntityUtils.toString(httpResponse.getEntity());
+				retSrc = EntityUtils.toString(httpResponse.getEntity());
 				Log.d("receive content", retSrc);
-	
-				// 生成 JSON 对象
-				result = new JSONArray(retSrc);
-				if (result != null)
-					Log.d("result", "yes");
-				else 
-					Log.d("result", "oh, no!");
+				
 			} catch (Exception e) {
 				Log.d("myerror", "Oops!");
                 e.printStackTrace();

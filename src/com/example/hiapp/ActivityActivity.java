@@ -10,6 +10,7 @@ import nettools.NetThread;
 
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -22,13 +23,13 @@ public class ActivityActivity extends ListActivity {
 	
 	private SimpleAdapter adapter; 
 	private ImageView button_back;
-	
+	private ImageView button_add;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contact_activity);
 		
-		NetThread t = new NetThread("getActivityList", 2, 1100012847, null, null, -1, null, null);
+		NetThread t = new NetThread("getActivityList", 100, 1100012847, null, null, null, -1, null, null);
 		t.BeginDeal();
 		
 		adapter = new SimpleAdapter(this, t.getDataList(), R.layout.list_row_activity, 
@@ -56,10 +57,12 @@ public class ActivityActivity extends ListActivity {
 	private void findViews()
 	{		
 		button_back = (ImageView) findViewById(R.id.go_back_button);
+		button_add = (ImageView) findViewById(R.id.go_add_button);
 	}
 	private void setListensers() 
 	{
 		button_back.setOnClickListener(goBack);
+		button_add.setOnClickListener(goAdd);
 	 }
 	
 	 private Button.OnClickListener goBack = new Button.OnClickListener()
@@ -69,7 +72,18 @@ public class ActivityActivity extends ListActivity {
 			  ActivityActivity.this.finish();
 		 }
 	 };	
-	
+	 private Button.OnClickListener goAdd = new Button.OnClickListener()
+	 {
+		  public void onClick(View v)
+		 {
+			  Intent intent = new Intent();
+			  intent.setClass(ActivityActivity.this, SendMessageActivity.class);
+			  Bundle bundle = new Bundle();
+			  intent.putExtras(bundle);
+			  startActivity(intent);
+			  
+		 }
+	 };	
 	private List<Map<String, Object>> getData() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		Map<String, Object> map = new HashMap<String, Object>();
