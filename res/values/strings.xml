@@ -35,5 +35,7 @@
     <string name="voting_new_submit"> 提交 </string> 
     <string name="voting_description_hint"> 投票描述 </string> 
 	<string name="voting_num_hint"> 1到100 </string> 
+    <string name="select_all"> 全选 </string> 
+    <string name="clear_selected"> 取消已选 </string> 
     
 </resources>
