@@ -22,7 +22,8 @@
             android:layout_alignParentLeft="true"
             android:layout_marginTop="6dp"
             android:clickable="true"
-            android:src="@drawable/button_back_background"      
+            android:src="@drawable/button_back_background" 
+            android:contentDescription="@string/go_back_but"       
 	    />
 	    	    
 	    <ImageView
@@ -30,7 +31,8 @@
     		android:layout_height="wrap_content"
             android:layout_toRightOf="@id/go_back_button"
             android:layout_marginLeft="4dp"
-            android:src="@drawable/title_image"      
+            android:src="@drawable/title_image"     
+            android:contentDescription="@string/title_image"   
 	    />
 	        
 	    <ImageView 
@@ -40,6 +42,7 @@
     		android:clickable="true"
             android:layout_alignParentRight="true"
             android:src="@drawable/button_add_background"   
+            android:contentDescription="@string/button_add"   
 	    />
 	    
 	</RelativeLayout>
@@ -52,7 +55,7 @@
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"
 	    android:layout_margin="4dp"
-	    android:text="发起新投票"
+	    android:text="@string/voting_add_voting"
 	    android:textColor="#427d6e"
 	    android:textSize="30sp"
 	    android:textStyle="bold" >    
@@ -80,13 +83,15 @@
 		            android:id="@+id/textView1"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		            android:text="投票名称"
+		            android:text="@string/voting_add_voting"
 		            android:textAppearance="?android:attr/textAppearanceMedium" />
 	
 		        <EditText
 		            android:id="@+id/VotingName"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
+		            android:hint="@string/voting_name_hint"
+		            android:singleLine="true"
 		            android:ems="10" >
 	
 		            <requestFocus />
@@ -103,13 +108,15 @@
 		            android:id="@+id/textView2"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		            android:text="投票描述"
+		            android:text="@string/voting_voting_description"
 		            android:textAppearance="?android:attr/textAppearanceMedium" />
 	
 		        <EditText
 		            android:id="@+id/VotingDescribe"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
+		            android:hint="@string/voting_description_hint"
+		            android:singleLine="true"
 		            android:ems="10" />
 	
 		    </TableRow>
@@ -123,7 +130,7 @@
 		            android:id="@+id/textView3"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
-		            android:text="投票选项数"
+		            android:text="@string/voting_choice_num"
 		            android:textAppearance="?android:attr/textAppearanceMedium" />
 	
 		        <EditText
@@ -131,6 +138,8 @@
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:ems="10"
+		            android:hint="@string/voting_num_hint"
+		            android:singleLine="true"
 		            android:inputType="number" />
 	
 		    </TableRow>
@@ -150,6 +159,6 @@
         android:layout_height="40dp"
         android:textColor="#FFFFFF" 
         android:background="@drawable/button_bg_background" 	
-	     android:text="提交" />
+	     android:text="@string/voting_new_submit" />
 
 </LinearLayout>

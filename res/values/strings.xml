@@ -22,5 +22,18 @@
     <string name="infor_user_tel_infor">电话:\t</string>   
     <string name="voting_hint">欢迎参加投票</string>   
     <string name="activity_send_hint1">输入活动名称</string>   
-    <string name="activity_send_hint2">输入活动内容</string>   
+    <string name="activity_send_hint2">输入活动内容</string>
+    <string name="voting_choice">投票选项</string>
+    <string name="go_back_but">返回</string>   
+    <string name="title_image">标题</string>   
+    <string name="choice_submit_button">提交</string>   
+    <string name="button_add">添加</string> 
+    <string name="voting_add_voting">发起新投票 </string> 
+    <string name="voting_name_hint">投票名称 </string>  
+    <string name="voting_voting_description">投票描述 </string>  
+    <string name="voting_choice_num">投票选项数 </string>  
+    <string name="voting_new_submit"> 提交 </string> 
+    <string name="voting_description_hint"> 投票描述 </string> 
+	<string name="voting_num_hint"> 1到100 </string> 
+    
 </resources>

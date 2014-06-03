@@ -22,7 +22,8 @@
             android:layout_alignParentLeft="true"
             android:layout_marginTop="6dp"
             android:clickable="true"
-            android:src="@drawable/button_back_background"      
+            android:src="@drawable/button_back_background"   
+            android:contentDescription="@string/go_back_but"     
 	    />
 	    	    
 	    <ImageView
@@ -31,6 +32,7 @@
             android:layout_toRightOf="@id/go_back_button"
             android:layout_marginLeft="4dp"
             android:src="@drawable/title_image"      
+            android:contentDescription="@string/title_image"   
 	    />
 	        
 	    <ImageView 
@@ -39,7 +41,8 @@
     		android:layout_height="wrap_content"
     		android:clickable="true"
             android:layout_alignParentRight="true"
-            android:src="@drawable/button_add_background"   
+            android:src="@drawable/button_add_background"  
+            android:contentDescription="@string/choice_submit_button"  
 	    />
 	    
 	</RelativeLayout>
