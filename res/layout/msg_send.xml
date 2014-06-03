@@ -3,41 +3,76 @@
 android:layout_width="fill_parent"
 android:layout_height="wrap_content"
 android:orientation="vertical" > 
-  
-<TextView
-android:id="@+id/intext"
-android:layout_width="fill_parent"
-android:layout_height="50dip"
-android:textColor="#000F00"
-android:textSize="11pt"
-android:gravity="center_vertical"
-android:layout_marginLeft="10dip"
-android:text="welcome"
-/>
+  <RelativeLayout
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:paddingLeft="12dp"
+    	android:paddingRight="12dp"
+    	android:paddingTop="4dp"
+    	android:paddingBottom="4dp"
+    	android:background="@drawable/menu_bg"
+    	android:orientation="horizontal">
+	   
+	    <ImageView
+	        android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/title_image"      
+	    />
+	        
+	    <ImageView 
+	        android:layout_width="wrap_content"
+    		android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/button_add"   
+	    />
+	    
+	</RelativeLayout>
+	<RelativeLayout 
+  	android:id="@+id/login_div"
+  	android:layout_width="fill_parent"
+  	android:layout_height="wrap_content"
+  	android:padding="15dip"        
+  	android:layout_margin="15dip" 
+  	android:background="@drawable/background_login_div_bg"
+  	>
+		<TextView
+		android:id="@+id/intext"
+		android:layout_width="fill_parent"
+		android:layout_height="50dip"
+		android:textColor="#000F00"
+		android:textSize="11pt"
+		
+		android:layout_marginLeft="10dip"
+		android:text="welcome"
+		/>
 
-<EditText
-android:id="@+id/inedit"
-android:layout_width="fill_parent"
-   android:layout_height="wrap_content"
-   android:hint="input here"
-   android:inputType="textMultiLine"
-   android:gravity="left|top"
-   android:minLines="3"
-/>
+		<EditText
+			android:id="@+id/inedit"
+			android:layout_width="fill_parent"
+		   android:layout_height="wrap_content"
+		   android:hint="input here"
+		   android:inputType="textMultiLine"
+		   
+		   android:minLines="3"
+		/>
+</RelativeLayout>
 
-<RelativeLayout
-android:layout_width="fill_parent"
-android:layout_height="53dip"
-android:orientation="horizontal"
->
+	<RelativeLayout
+		android:layout_width="fill_parent"
+		android:layout_height="53dip"
+		android:orientation="horizontal"
+	>
 
-<Button 
-android:id="@+id/confirm"
-android:layout_width="80dip"
-android:layout_height="50dip"
-android:layout_marginLeft="20dip"
-android:text="確定"
-android:gravity="center"
-/>
+	<Button 
+		android:id="@+id/confirm"
+		android:layout_width="80dip"
+		android:layout_height="50dip"
+		android:layout_marginLeft="20dip"
+		android:textColor="#FFFFFF" 
+        android:background="@drawable/button_bg_background" 	
+	     android:text="@string/voting_new_submit" 
+	 />
+
   </RelativeLayout>
 </LinearLayout>
