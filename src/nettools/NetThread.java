@@ -10,6 +10,10 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.mime.content.ContentBody;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
@@ -18,9 +22,11 @@ import org.json.JSONObject;
 
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,38 +35,40 @@ import android.os.Message;
 import android.util.Log;
 
 public class NetThread{
-	
+
 	private final static String TAG = "HiApp";
-	
+
 	public String url;
-	
+
 	public String method;	
 	public int count;
 	//public String user_id;
 	public int user_id;
-	
+
 	public String publisher_id;
 	public String title;
 	public String content;
-	
+
 	public int msg_id;
-	
+
 	public String username;
 	public String password;
 
 	public String retSrc;
 	public JSONArray result;
-	
+
 	public Bitmap mBitmap1;
 	public Bitmap mBitmap2;
 	public Bitmap mBitmap3;
-	
+
+	String[] picturePaths;
+
 	JSONObject param = new JSONObject();
-	
+
 	public NetThread(){}
-	
+
 	public NetThread(String m, int ct, int uid, String pid, String _title, String ctt,
-			  		 int mid, String u, String p){
+			int mid, String u, String p){
 		method = m;
 		count = ct;
 		user_id = uid;
@@ -82,9 +90,37 @@ public class NetThread{
 			if (password != null) param.put("password", password);
 		} catch (Exception e) {
 			e.printStackTrace();
-        }		
+		}		
 	}
-	
+
+	//paths中是需要上传的图片路径，因为担心破坏前面代码的兼容性，所以重载了构造函数
+	public NetThread(String m, int ct, int uid, String pid, String _title, String ctt,
+			int mid, String u, String p, String[] paths){
+		method = m;
+		count = ct;
+		user_id = uid;
+		publisher_id = pid;
+		title = _title;
+		content = ctt;
+		msg_id = mid;
+		username = u;
+		password = p;
+		picturePaths = paths;
+		try{
+			if (method != null) param.put("method", method);
+			if (count >= 0) param.put("count", count);
+			if (user_id >= 0) param.put("user_id", user_id);
+			if (publisher_id != null) param.put("publisher_id", publisher_id);
+			if (title != null) param.put("title", title);
+			if (content != null) param.put("content", content);
+			if (msg_id >= 0) param.put("msg_id", msg_id);
+			if (username != null) param.put("username", username);
+			if (password != null) param.put("password", password);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
+	}
+
 	public void BeginDeal(){
 		try{
 			url = "http://hiappclass4demo.sinaapp.com";
@@ -92,13 +128,13 @@ public class NetThread{
 			t.start();
 			t.join();
 		} catch (Exception e) {
-            e.printStackTrace();
-        }
+			e.printStackTrace();
+		}
 	}
 
 	public int getReturnCode()
 	{
-		
+
 		try {
 			JSONObject object = new JSONObject(retSrc);
 			return object.getInt("return_code");
@@ -107,7 +143,7 @@ public class NetThread{
 		}
 		return -1;
 	}
-	
+
 	public List<Map<String, Object>> getDataList(){
 		String[] str1 = null, str2 = null;
 		if (method.equals("getActivityList"))
@@ -117,11 +153,11 @@ public class NetThread{
 		}
 		else if (method.equals("getCmtList"))
 		{
-			
+
 		}
 		else if (method.equals("sendCmt"))
 		{
-			
+
 		}
 		else if (method.equals("getMessages"))
 		{
@@ -133,7 +169,7 @@ public class NetThread{
 			str1 = Variable.info;
 			str2 = Variable.info;
 		}
-		
+
 		try {			
 			int  i;
 			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
@@ -161,11 +197,11 @@ public class NetThread{
 
 			return list;
 		} catch (Exception e) {
-            e.printStackTrace();
-        }
+			e.printStackTrace();
+		}
 		return null;
 	}
-	
+
 	public String convert(String time) {
 		int  i;
 		String res;
@@ -174,7 +210,7 @@ public class NetThread{
 		res = temp.substring(0, i);
 		return res;
 	}
-	
+
 	public List<Map<String, Object>> talk(){
 		try {
 			int  i;
@@ -213,116 +249,171 @@ public class NetThread{
 				return list;
 			}			
 		} catch (Exception e) {
-            e.printStackTrace();
-        }
+			e.printStackTrace();
+		}
 		return null;
 	}
 
-	 /**
-	     * Get image from network
-	     * @param path The path of image
-	     * @return byte[]
-	     * @throws Exception
-	     */
-	    public byte[] getImage(String path) throws Exception{
-	        URL url = new URL(path);
-	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	        conn.setConnectTimeout(5 * 1000);
-	        conn.setRequestMethod("GET");
-	        InputStream inStream = conn.getInputStream();
-	        if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
-	            return readStream(inStream);
-	        }
-	        return null;
-	    }
+	/**
+	 * Get image from network
+	 * @param path The path of image
+	 * @return byte[]
+	 * @throws Exception
+	 */
+	public byte[] getImage(String path) throws Exception{
+		URL url = new URL(path);
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setConnectTimeout(5 * 1000);
+		conn.setRequestMethod("GET");
+		InputStream inStream = conn.getInputStream();
+		if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+			return readStream(inStream);
+		}
+		return null;
+	}
 
-	    /**
-	     * Get image from network
-	     * @param path The path of image
-	     * @return InputStream
-	     * @throws Exception
-	     */
-	    public InputStream getImageStream(String path) throws Exception{
-	        URL url = new URL(path);
-	        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	        conn.setConnectTimeout(5 * 1000);
-	        conn.setRequestMethod("GET");
-	        if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
-	            return conn.getInputStream();
-	        }
-	        return null;
-	    }
-	    /**
-	     * Get data from stream
-	     * @param inStream
-	     * @return byte[]
-	     * @throws Exception
-	     */
-	    public static byte[] readStream(InputStream inStream) throws Exception{
-	        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-	        byte[] buffer = new byte[1024];
-	        int len = 0;
-	        while( (len=inStream.read(buffer)) != -1){
-	            outStream.write(buffer, 0, len);
-	        }
-	        outStream.close();
-	        inStream.close();
-	        return outStream.toByteArray();
-	    }
+	/**
+	 * Get image from network
+	 * @param path The path of image
+	 * @return InputStream
+	 * @throws Exception
+	 */
+	public InputStream getImageStream(String path) throws Exception{
+		URL url = new URL(path);
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		conn.setConnectTimeout(5 * 1000);
+		conn.setRequestMethod("GET");
+		if(conn.getResponseCode() == HttpURLConnection.HTTP_OK){
+			return conn.getInputStream();
+		}
+		return null;
+	}
+	/**
+	 * Get data from stream
+	 * @param inStream
+	 * @return byte[]
+	 * @throws Exception
+	 */
+	public static byte[] readStream(InputStream inStream) throws Exception{
+		ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024];
+		int len = 0;
+		while( (len=inStream.read(buffer)) != -1){
+			outStream.write(buffer, 0, len);
+		}
+		outStream.close();
+		inStream.close();
+		return outStream.toByteArray();
+	}
 
 
-	    /*
-	     * 连接网络
-	     * 由于在4.0中不允许在主线程中访问网络，所以需要在子线程中访问
-	     */
-	    private Runnable connectNet = new Runnable(){
-	        @Override
-	        public void run() {
-	            try {
-	                String filePath = "http://img.my.csdn.net/uploads/201402/24/1393242467_3999.jpg";
+	/*
+	 * 连接网络
+	 * 由于在4.0中不允许在主线程中访问网络，所以需要在子线程中访问
+	 */
+	private Runnable connectNet = new Runnable(){
+		@Override
+		public void run() {
+			try {
+				String filePath = "http://img.my.csdn.net/uploads/201402/24/1393242467_3999.jpg";
 
-	                //以下是取得图片的两种方法
-	                //////////////// 方法1：取得的是byte数组, 从byte数组生成bitmap
-	                /*
+				//以下是取得图片的两种方法
+				//////////////// 方法1：取得的是byte数组, 从byte数组生成bitmap
+				/*
 	                byte[] data = getImage(filePath);
 	                if(data!=null){
 	                    mBitmap = BitmapFactory.decodeByteArray(data, 0, data.length);// bitmap
 	                }else{
 	                    Toast.makeText(MainActivity.this, "Image error!", 1).show();
 	                }
-	                */
-	                ////////////////////////////////////////////////////////
+				 */
+				////////////////////////////////////////////////////////
 
-	                //******** 方法2：取得的是InputStream，直接从InputStream生成bitmap ***********/
-	                mBitmap1 = BitmapFactory.decodeStream(getImageStream(filePath));
-	                //********************************************************************/
+				//******** 方法2：取得的是InputStream，直接从InputStream生成bitmap ***********/
+				mBitmap1 = BitmapFactory.decodeStream(getImageStream(filePath));
+				//********************************************************************/
 
-	                // 发送消息，通知handler在主线程中更新UI
-	                //connectHanlder.sendEmptyMessage(0);
-	                Log.d(TAG, "set image ...");
-	            } catch (Exception e) {
-	                e.printStackTrace();
-	            }
+				// 发送消息，通知handler在主线程中更新UI
+				//connectHanlder.sendEmptyMessage(0);
+				Log.d(TAG, "set image ...");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
-	        }
+		}
 
-	    };
+	};
 
-	    private Handler connectHanlder = new Handler() {
-	        @Override
-	        public void handleMessage(Message msg) {
-	        	//mSaveDialog.dismiss();
-	            Log.d(TAG, "display image");
-	            
-	            // 更新UI，显示图片
-	           // if (mBitmap != null) {
-	           //     mImageView.setImageBitmap(mBitmap);// display image
-	           // }
-	            
-	        }
-	    };
+	private Handler connectHanlder = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			//mSaveDialog.dismiss();
+			Log.d(TAG, "display image");
 
+			// 更新UI，显示图片
+			// if (mBitmap != null) {
+			//     mImageView.setImageBitmap(mBitmap);// display image
+			// }
+
+		}
+	};
+
+
+	//sendPic 和 bigDeal的用法一样
+	public void sendpic(){
+		url = "http://hiappclass4demo.sinaapp.com/";
+		Thread t = new Thread(uploadpic);
+		t.start();
+		try {
+			t.join(); // wait for t to finish
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
+	}
 	
+	//和connect类似，不过不是用json机制
+	public Runnable uploadpic = new Runnable(){
+		@Override
+		public void run(){
+			try{
+				HttpClient client = new DefaultHttpClient();
+				HttpPost request = new HttpPost(url);
+				MultipartEntity mpEntity = new MultipartEntity();
+				
+				mpEntity.addPart("method",  
+	                    new StringBody("sendPictures", Charset.forName("UTF-8")));
+				
+				mpEntity.addPart("publisher_id",  
+	                    new StringBody(publisher_id, Charset.forName("UTF-8")));
+				
+				mpEntity.addPart("title",  
+	                    new StringBody(title, Charset.forName("UTF-8")));
+				
+				int i = 0;
+				for(String s:picturePaths){
+					String tag = "pic" + i;
+					File file = new File(s);
+					ContentBody cbFile = new FileBody(file);
+					mpEntity.addPart(tag, cbFile);
+				}
+				
+				request.setEntity(mpEntity);
+
+				// 发送请求
+				HttpResponse httpResponse = client.execute(request);
+
+				// 得到应答的字符串，这也是一个 JSON 格式保存的数据
+				retSrc = EntityUtils.toString(httpResponse.getEntity());
+				Log.d("receive content", retSrc);
+
+			} catch (Exception e) {
+				Log.d("myerror", "Oops!");
+				e.printStackTrace();
+			}
+		}
+
+	};
+
 	public Runnable connect = new Runnable(){
 		@Override
 		public void run(){
@@ -330,25 +421,25 @@ public class NetThread{
 				HttpClient client = new DefaultHttpClient();
 				HttpPost request = new HttpPost(url);
 				//request.setHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
-				
+
 				Log.d("request json", param.toString());
-				 
+
 				// 绑定到请求 Entry
 				StringEntity se = new StringEntity(param.toString(), "utf-8"); 
 				request.setEntity(se);
-				
+
 				// 发送请求
 				HttpResponse httpResponse = client.execute(request);
-				
+
 				// 得到应答的字符串，这也是一个 JSON 格式保存的数据
 				retSrc = EntityUtils.toString(httpResponse.getEntity());
 				Log.d("receive content", retSrc);
-				
+
 			} catch (Exception e) {
 				Log.d("myerror", "Oops!");
-                e.printStackTrace();
-            }
+				e.printStackTrace();
+			}
 		}
-		
+
 	};
 }
