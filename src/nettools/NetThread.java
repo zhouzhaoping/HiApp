@@ -56,12 +56,15 @@ public class NetThread{
 
 	public String retSrc;
 	public JSONArray result;
+	public JSONObject resobj;
 
 	public Bitmap mBitmap1;
 	public Bitmap mBitmap2;
 	public Bitmap mBitmap3;
 
-	String[] picturePaths;
+	public String[] picturePaths;
+	
+	public String picPath;
 
 	JSONObject param = new JSONObject();
 
@@ -131,6 +134,17 @@ public class NetThread{
 			e.printStackTrace();
 		}
 	}
+	
+	public void BeginPicDeal(){
+		try{
+			url = "http://hiappclass4demo.sinaapp.com";
+			Thread t = new Thread(connectNet);
+			t.start();
+			t.join();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public int getReturnCode()
 	{
@@ -142,6 +156,65 @@ public class NetThread{
 			e.printStackTrace();
 		}
 		return -1;
+	}
+	
+	public List<Map<String, Object>> getActivityDataList(){
+		String[] str1 = null, str2 = null;
+		String t = null;
+		str1 = Variable.server_activity;
+		str2 = Variable.client_activity;
+		try {			
+			int  i;
+			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+			// 生成 JSON 对象
+			result = new JSONArray(retSrc);
+			if (result == null) {
+				Log.d("pic result", "null");
+				return null;
+			}
+			for (i = 0; i < result.length(); i++)	{
+				// 尽管像info那样的只有单个信息，也需要放在list里，为了统一的设计
+				JSONObject object = result.getJSONObject(i);
+				if (object == null){
+					return null;
+				}
+				Map<String, Object> map = new HashMap<String, Object>();
+				for (int j = 0; j < str2.length; j++)
+				{
+					String strget = object.getString(str1[j]);
+					if (str1[j].equals("title")){
+						t = strget;
+						Log.d("title", t);
+						map.put("act_name", t);
+						NetThread pt = new NetThread("getPictures", 1, 0, "1100012847", t, null, 0, null, null, null);
+						pt.BeginDeal();
+						List<Map<String, Object>> piclist = pt.getDataList();
+						Map<String, Object> picmap = new HashMap<String, Object>();
+						if (piclist != null){
+							picmap = piclist.get(0);
+							picPath = picmap.get("picpath").toString();
+							Log.d("picPath", picPath);
+							if (picPath != null){
+								this.BeginPicDeal();
+								if (mBitmap1 != null) {
+									map.put("act_main_pic", mBitmap1);
+								}
+							}
+						}
+					}
+					else if (str1[j].equals("publish_time"))
+						map.put(str2[j], convert(strget));
+					else
+						map.put(str2[j], strget);
+					//TODO:如果不是String需要用switch语句来进行分类处理		
+				}
+				list.add(map);
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	public List<Map<String, Object>> getDataList(){
@@ -164,7 +237,7 @@ public class NetThread{
 			str1 = Variable.getMessage;
 			str2 = Variable.getMessage;
 		}
-		else if (method.equals("getuserinfo"))
+		else if (method.equals("getUserInfor"))
 		{
 			str1 = Variable.info;
 			str2 = Variable.info;
@@ -179,18 +252,14 @@ public class NetThread{
 			int  i;
 			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 			// 生成 JSON 对象
-			result = new JSONArray(retSrc);
-			if (result != null)
-				Log.d("result", "yes");
-			else 
-				Log.d("result", "oh, no!");
-			for (i = 0; i < result.length(); i++)	{
-				// 尽管像info那样的只有单个信息，也需要放在list里，为了统一的设计
-				JSONObject object = result.getJSONObject(i);
+			if (method.equals("getUserInfor")){
+				resobj = new JSONObject(retSrc);
+				if (resobj == null)
+					return null;
 				Map<String, Object> map = new HashMap<String, Object>();
 				for (int j = 0; j < str2.length; j++)
 				{
-					String strget = object.getString(str1[j]);
+					String strget = resobj.getString(str1[j]);
 					if (str1[j].equals("publish_time"))
 						map.put(str2[j], convert(strget));
 					else
@@ -199,7 +268,27 @@ public class NetThread{
 				}
 				list.add(map);
 			}
-
+			else {
+				result = new JSONArray(retSrc);
+				if (result == null)
+					return null;
+				if (result.length() == 0) return null;
+				for (i = 0; i < result.length(); i++)	{
+					// 尽管像info那样的只有单个信息，也需要放在list里，为了统一的设计
+					JSONObject object = result.getJSONObject(i);
+					Map<String, Object> map = new HashMap<String, Object>();
+					for (int j = 0; j < str2.length; j++)
+					{
+						String strget = object.getString(str1[j]);
+						if (str1[j].equals("publish_time"))
+							map.put(str2[j], convert(strget));
+						else
+							map.put(str2[j], strget);
+						//TODO:如果不是String需要用switch语句来进行分类处理		
+					}
+					list.add(map);
+				}
+			}
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -320,7 +409,7 @@ public class NetThread{
 		@Override
 		public void run() {
 			try {
-				String filePath = "http://img.my.csdn.net/uploads/201402/24/1393242467_3999.jpg";
+				String filePath = picPath;
 
 				//以下是取得图片的两种方法
 				//////////////// 方法1：取得的是byte数组, 从byte数组生成bitmap
@@ -381,6 +470,7 @@ public class NetThread{
 		@Override
 		public void run(){
 			try{
+				Log.d("picture request json", param.toString());
 				HttpClient client = new DefaultHttpClient();
 				HttpPost request = new HttpPost(url);
 				MultipartEntity mpEntity = new MultipartEntity();

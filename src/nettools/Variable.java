@@ -8,7 +8,7 @@ public final class Variable
 	
 	public static String contact[] = {"person_name", "person_telephone", "person_introduction", "person_profile"};
 	public static String getMessage[] = {"msg_from", "msg_time", "msg_content"};
-	public static String info[] = {"username", "usersex", "userbirth", "useruniver", "userQQ", "usertel", "usersay"};
+	public static String info[] = {"username", "usersex", "userbirth", "useruniver", "userqq", "usertel", "usersay"};
 	
 	public static String return_code[] = {"return_code"};
 	public static String comment[] = {"activity_id", "publisher_id", "publish_time", "content"};
