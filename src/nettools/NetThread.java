@@ -169,6 +169,11 @@ public class NetThread{
 			str1 = Variable.info;
 			str2 = Variable.info;
 		}
+		else if (method.equals("getPictures"))
+		{
+			str1 = Variable.pictures;
+			str2 = Variable.pictures;
+		}
 
 		try {			
 			int  i;

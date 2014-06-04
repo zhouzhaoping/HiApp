@@ -12,4 +12,6 @@ public final class Variable
 	
 	public static String return_code[] = {"return_code"};
 	public static String comment[] = {"activity_id", "publisher_id", "publish_time", "content"};
+	
+	public static String pictures[] = {"picpath"};
 }
